@@ -19,15 +19,19 @@ class App {
         while (true) {
             System.out.print("명령) ");
             String cmd = scanner.nextLine();
-
             //.formatted(cmd)는 +cmd 와 같은 표현임
             //System.out.println("입력된 명령어 : %s".formatted(cmd));
 
             if (cmd.equals("종료")) {
                 break;
+            } else if (cmd.equals("등록")) {
+                System.out.print("명언: ");
+                String content = scanner.nextLine();
+
+                System.out.print("작가: ");
+                String author = scanner.nextLine();
             }
         }
-
         scanner.close();
     }
 }
