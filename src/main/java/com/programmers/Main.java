@@ -45,6 +45,17 @@ class App {
                     System.out.println(ws.id + " / " + ws.author + " / " + ws.content);
                 }
             }
+            else if (cmd.startsWith("삭제?id=")) {
+                int id = Integer.parseInt(cmd.split("=")[1]);
+
+                for (int i = 0; i < wss.size(); i++) {
+                    if (wss.get(i).id == id) {
+                        wss.remove(i);
+                        System.out.println(id + "번 명언이 삭제되었습니다.");
+                        break;
+                    }
+                }
+            }
         }
         scanner.close();
     }
