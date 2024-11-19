@@ -1,6 +1,7 @@
 package com.programmers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,7 +15,7 @@ class App {
     public void run() {
         //입력을 받음. 스캐너는 한번만 생성()
         Scanner scanner = new Scanner(System.in);
-        ArrayList<WiseSaying> wss = new ArrayList<>();
+        List<WiseSaying> wss = new ArrayList<>();
         int count = 0;
 
         System.out.println("== 명언 앱 ==");
@@ -47,13 +48,18 @@ class App {
             }
             else if (cmd.startsWith("삭제?id=")) {
                 int id = Integer.parseInt(cmd.split("=")[1]);
+                boolean found = false;
 
                 for (int i = 0; i < wss.size(); i++) {
                     if (wss.get(i).id == id) {
                         wss.remove(i);
                         System.out.println(id + "번 명언이 삭제되었습니다.");
+                        found = true;
                         break;
                     }
+                }
+                if (!found) {
+                    System.out.println(id + "번 명언은 존재하지 않습니다.");
                 }
             }
         }
