@@ -1,5 +1,7 @@
 package com.programmers;
 
+import java.util.Scanner;
+
 public class Wise_Saying {
     public static void main(String[] args) {
         App app = new App();
@@ -8,10 +10,17 @@ public class Wise_Saying {
 }
 
 class App {
-    public void run(){
+    public void run() {
         System.out.println("== 명언 앱 ==");
 
-        System.out.println("명령 ) ");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("명령) ");
+        String cmd = scanner.nextLine();
+
+        System.out.println("입력된 명령어 : %s".formatted(cmd));
+
+        scanner.close();
     }
 }
 
