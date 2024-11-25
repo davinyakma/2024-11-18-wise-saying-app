@@ -8,6 +8,7 @@ import java.util.Scanner;
 class App {
     private static final String DB_PATH = "db/wiseSaying";
     private static final String LAST_ID_FILE = DB_PATH + "/lastId.txt";
+    private static final String DATA_FILE = DB_PATH + "/data.json"; //빌드 파일 경로
 
     public void run() {
         // Scanner 객체 생성
@@ -41,7 +42,10 @@ class App {
                 } catch (NumberFormatException e) {
                     System.out.println("잘못된 명령 형식입니다. 예: 수정?id=1");
                 }
-            } else {
+            } else if(cmd.equals("빌드")){
+                buildDataFile();
+            }
+            else {
                 System.out.println("알 수 없는 명령입니다.");
             }
         }
@@ -173,5 +177,34 @@ class App {
 
         saveWiseSayingToFile(wiseSaying);
         System.out.println(id + "번 명언이 수정되었습니다.");
+    }
+
+    private void buildDataFile() {
+        File folder = new File(DB_PATH);
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
+
+        if (files == null || files.length == 0) {
+            System.out.println("등록된 명언이 없습니다.");
+            return;
+        }
+
+        List<WiseSaying> wiseSayings = new ArrayList<>();
+        for (File file : files) {
+            wiseSayings.add(loadWiseSayingFromFile(file));
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE))) {
+            writer.write("[");
+            for (int i = 0; i < wiseSayings.size(); i++) {
+                writer.write(wiseSayings.get(i).toJson());
+                if (i < wiseSayings.size() - 1) {
+                    writer.write(",");
+                }
+            }
+            writer.write("]");
+            System.out.println("data.json 파일의 내용이 갱신되었습니다.");
+        } catch (IOException e) {
+            System.out.println("data.json 파일 생성 중 오류 발생: " + e.getMessage());
+        }
     }
 }
