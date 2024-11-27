@@ -20,8 +20,12 @@ class App {
             System.out.print("명령) ");
             String cmd = scanner.nextLine();
 
-            if(cmd.equals("종료")){ // == 대신에 .equals를 써야 함.
-                break; //while문을 빠져나갈 break; 문이 없다면 while문 다음의 코드가 오류가 남.
+            if(cmd.equals("종료")) break;
+            else if(cmd.equals("등록")){
+                System.out.print("명언 : ");
+                String content = scanner.nextLine();
+                System.out.print("작가 : ");
+                String author = scanner.nextLine();
             }
         }
         scanner.close();
