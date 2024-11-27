@@ -17,7 +17,7 @@ class App {
         Scanner scanner = new Scanner(System.in);
 
         int lastId = 0;
-        WiseSaying lastWiseSaying = null; //WiseSaying 객체의 수명을 늘리기 위해 while문 밖에 생성
+        WiseSaying lastWiseSaying = null;
         while (true) {
             System.out.print("명령) ");
             String cmd = scanner.nextLine();
@@ -32,11 +32,10 @@ class App {
 
                 int id = ++lastId;
 
-                WiseSaying wiseSaying = new WiseSaying(id, content, author); // 한 번에 객체 생성하려면 WiseSaying에서 매개변수 받는 생성자 생성
-//                wiseSaying.id = id;
-//                wiseSaying.content = content;
-//                wiseSaying.author = author;
+                WiseSaying wiseSaying = new WiseSaying(id, content, author);
 
+                System.out.println(wiseSaying); // 그러나 실제로는 com.programmers.WiseSaying@5jkdjkle이런 식으로 객체의 주소값이 출력됨.
+                // WiseSaying (id=1, content="명언", author="작가") 이렇게 출력하고 싶음. 이 출력문처럼 나오도록 커스터마이징 가능하다.
                 lastWiseSaying = wiseSaying;
 
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
@@ -50,7 +49,8 @@ class App {
     }
 }
 
-class WiseSaying{
+// toString 메소드가 Object클래스에 내장되어 있다.
+class WiseSaying extends Object{
     int id;
     String content;
     String author;
@@ -59,6 +59,11 @@ class WiseSaying{
         this.id = id;
         this.content = content;
         this.author = author;
+    }
+
+    @Override //String클래스의 toString을 오버라이딩하여 커스텀을 할 수 있음
+    public String toString() {
+        return "WiseSaying (id=%d, content=\"%s\", author=\"%s\")".formatted(id, content, author);
     }
 }
 
