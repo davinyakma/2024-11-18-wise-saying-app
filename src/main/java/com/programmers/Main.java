@@ -14,13 +14,16 @@ class App {
     public void run() {
         System.out.println("== 명언 앱 ==");
 
-        //생성
-        Scanner scanner = new Scanner(System.in); //System.in: 키보드, Scanner: 모니터, 키보드 감시자(전달자)
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("명령) ");
-        String cmd = scanner.nextLine(); //enter가 입력될 때까지의 문장 전체를 입력받음.
+        while (true) {
+            System.out.print("명령) ");
+            String cmd = scanner.nextLine();
 
-        System.out.println("입력된 명령어 : %s".formatted(cmd)); //.formatted(cmd): cmd의 값을 %s에 넣어준다.
+            if(cmd.equals("종료")){ // == 대신에 .equals를 써야 함.
+                break; //while문을 빠져나갈 break; 문이 없다면 while문 다음의 코드가 오류가 남.
+            }
+        }
         scanner.close();
     }
 }
