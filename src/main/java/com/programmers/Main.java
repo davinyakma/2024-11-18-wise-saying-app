@@ -29,27 +29,28 @@ class App {
                 String content = scanner.nextLine();
                 System.out.print("작가 : ");
                 String author = scanner.nextLine();
-
                 int id = ++lastId;
 
                 WiseSaying wiseSaying = new WiseSaying(id, content, author);
-
-                System.out.println(wiseSaying); // 그러나 실제로는 com.programmers.WiseSaying@5jkdjkle이런 식으로 객체의 주소값이 출력됨.
-                // WiseSaying (id=1, content="명언", author="작가") 이렇게 출력하고 싶음. 이 출력문처럼 나오도록 커스터마이징 가능하다.
                 lastWiseSaying = wiseSaying;
 
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             } else if (cmd.equals("목록")){
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
-                System.out.println("%d / %s / %s".formatted(lastWiseSaying.id, lastWiseSaying.author, lastWiseSaying.content));
+
+                try {
+                    System.out.println("%d / %s / %s".formatted(lastWiseSaying.id, lastWiseSaying.author, lastWiseSaying.content));
+                } catch (NullPointerException e) { //null에 대한 예외처리를 해야 프로그램이 종료되는 것을 방지할 수 있음.
+                    System.out.println("등록된 명언이 없습니다.");
+                }
+
             }
         }
         scanner.close();
     }
 }
 
-// toString 메소드가 Object클래스에 내장되어 있다.
 class WiseSaying extends Object{
     int id;
     String content;
@@ -61,7 +62,7 @@ class WiseSaying extends Object{
         this.author = author;
     }
 
-    @Override //String클래스의 toString을 오버라이딩하여 커스텀을 할 수 있음
+    @Override
     public String toString() {
         return "WiseSaying (id=%d, content=\"%s\", author=\"%s\")".formatted(id, content, author);
     }
