@@ -17,7 +17,6 @@ class App {
         Scanner scanner = new Scanner(System.in);
 
         int lastId = 0;
-        //초기값이 없어서 오류나니까 null로 초기화. Variable 'lastWiseSaying' might not have been initialized
         WiseSaying lastWiseSaying = null; //WiseSaying 객체의 수명을 늘리기 위해 while문 밖에 생성
         while (true) {
             System.out.print("명령) ");
@@ -33,18 +32,17 @@ class App {
 
                 int id = ++lastId;
 
-                WiseSaying wiseSaying = new WiseSaying();
-                wiseSaying.id = id;
-                wiseSaying.content = content;
-                wiseSaying.author = author;
+                WiseSaying wiseSaying = new WiseSaying(id, content, author); // 한 번에 객체 생성하려면 WiseSaying에서 매개변수 받는 생성자 생성
+//                wiseSaying.id = id;
+//                wiseSaying.content = content;
+//                wiseSaying.author = author;
 
-                lastWiseSaying = wiseSaying; //while문까지만 사용 가능한 wiseSaying을 while문 바깥의 lastWiseSaying에 리모컨을 전달해줌. 수명 늘어남.
+                lastWiseSaying = wiseSaying;
 
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             } else if (cmd.equals("목록")){
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
-                //최근 등록한 명언만 출력됨. wiseSaying가 하나여서 명언 한개만 저장 가능함.
                 System.out.println("%d / %s / %s".formatted(lastWiseSaying.id, lastWiseSaying.author, lastWiseSaying.content));
             }
         }
@@ -56,5 +54,11 @@ class WiseSaying{
     int id;
     String content;
     String author;
+
+    WiseSaying(int id, String content, String author) {
+        this.id = id;
+        this.content = content;
+        this.author = author;
+    }
 }
 
