@@ -39,9 +39,9 @@ class App {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-                try {
+                if (lastWiseSaying != null) {
                     System.out.println("%d / %s / %s".formatted(lastWiseSaying.id, lastWiseSaying.author, lastWiseSaying.content));
-                } catch (NullPointerException e) { //null에 대한 예외처리를 해야 프로그램이 종료되는 것을 방지할 수 있음.
+                } else {
                     System.out.println("등록된 명언이 없습니다.");
                 }
 
