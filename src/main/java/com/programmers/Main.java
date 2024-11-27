@@ -30,10 +30,22 @@ class App {
                 String author = scanner.nextLine();
 
                 int id = ++lastId;
+
+                //명언에 같이 저장되는 데이터 패키징(묶음)
+                WiseSaying wiseSaying = new WiseSaying(); //빈 객체 생성. 목록을 저장하기 위한 객체
+                wiseSaying.id = id; //명언 번호
+                wiseSaying.content = content; //내용
+                wiseSaying.author = author; //작가
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             }
         }
         scanner.close();
     }
+}
+
+class WiseSaying{
+    int id;
+    String content;
+    String author;
 }
 
