@@ -1,10 +1,11 @@
 package com.programmers;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        App app = new App(); //app이라는 레퍼런스 변수. App클래스의 객체 생성.
-        //그 객체의 주소값(리모컨)이 app에 저장!
-        app.run(); //ctrl + 1 하면 자동으로 필요한 run메소드 생성해줌.
+        App app = new App();
+        app.run();
     }
 }
 
@@ -13,7 +14,14 @@ class App {
     public void run() {
         System.out.println("== 명언 앱 ==");
 
+        //생성
+        Scanner scanner = new Scanner(System.in); //System.in: 키보드, Scanner: 모니터, 키보드 감시자(전달자)
+
         System.out.print("명령) ");
+        String cmd = scanner.nextLine(); //enter가 입력될 때까지의 문장 전체를 입력받음.
+
+        System.out.println("입력된 명령어 : %s".formatted(cmd)); //.formatted(cmd): cmd의 값을 %s에 넣어준다.
+        scanner.close();
     }
 }
 
