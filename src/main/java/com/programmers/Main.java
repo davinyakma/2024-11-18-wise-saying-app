@@ -15,8 +15,7 @@ class App {
     WiseSaying[] wiseSayings;
     int wiseSayingsSize;
 
-    //개인 스타일대로 인스턴스 변수를 한꺼번에 초기화해도 되지만 변수 선언만 하고 생성자로 초기화를 하면 기능이 나눠지니깐 보기 깔끔함.
-    App() { //new App();을 할 때 자동으로 실행되기 때문에 인스턴스 변수를 초기화 하지 않고 생성자에서 초기화를 해도 됨. new
+    App() {
         scanner = new Scanner(System.in);
         lastId = 0;
         wiseSayings =  new WiseSaying[100];
@@ -35,13 +34,7 @@ class App {
             } else if (cmd.equals("등록")) {
                 actionAdd();
             } else if (cmd.equals("목록")){
-                System.out.println("번호 / 작가 / 명언");
-                System.out.println("----------------------");
-
-                for(WiseSaying wiseSaying : wiseSayings) {
-                    if( wiseSaying == null) break;
-                    System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
-                }
+                actionList(); //actionAdd()처럼 actionList()로 run()함수를 분기함.
             }
         }
         scanner.close();
@@ -60,6 +53,16 @@ class App {
         wiseSayingsSize++;
 
         System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
+    }
+
+    void actionList() {
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("----------------------");
+
+        for(WiseSaying wiseSaying : wiseSayings) {
+            if( wiseSaying == null) break;
+            System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+        }
     }
 }
 
