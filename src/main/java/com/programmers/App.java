@@ -30,10 +30,11 @@ public class App {
                 actionAdd();
             } else if (cmd.equals("목록")) {
                 actionList();
-            } else if (cmd.startsWith("삭제")) { //cmd.equals("")를 하면 명령어와 같은 문자열만 인식 가능함. startsWith으로 '삭제?id='를 포함한 명령어를 인식하도록 수정
-                String idStr = cmd.substring(6); //'='다음부터 추출한다(id추출 가능)
-                int id = Integer.parseInt(idStr); //String타입을 int로 변환. '1' -> 1(정수)
-                actionDelete(id); //삭제 명령으로 입력한 id에 해당한 명언 삭제
+            } else if (cmd.startsWith("삭제")) {
+                String idStr = cmd.substring(6);
+                int id = Integer.parseInt(idStr);
+
+                actionDelete(id);
             }
         }
         scanner.close();
@@ -74,8 +75,9 @@ public class App {
     }
 
     private void actionDelete(int id) {
-        boolean removed = wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id); // removeIf는 boolean값을 리턴함.
+        boolean removed = wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
 
-        if (removed) System.out.println("%d번 명언을 삭제했습니다.".formatted(id)); //removeIf가 true를 리턴했다면 실행
+        if (removed) System.out.println("%d번 명언을 삭제했습니다.".formatted(id));
+        else System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
     }
 }
