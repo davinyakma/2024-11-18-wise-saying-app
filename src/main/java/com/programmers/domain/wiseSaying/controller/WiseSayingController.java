@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
+    private final Scanner scanner;
     private final List<WiseSaying> wiseSayings;
     private int lastId;
-    private Scanner scanner;
 
     public WiseSayingController(Scanner scanner) {
         this.wiseSayings = new ArrayList<>();
