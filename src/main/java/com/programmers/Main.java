@@ -10,10 +10,18 @@ public class Main {
 }
 
 class App {
-    Scanner scanner = new Scanner(System.in); //공통으로 함수들이 사용하는 변수를 바깥으로 빼내면 인스턴스 변수가 된다.
-    int lastId = 0;
-    WiseSaying[] wiseSayings =  new WiseSaying[10];
-    int wiseSayingsSize = 0;
+    Scanner scanner;
+    int lastId;
+    WiseSaying[] wiseSayings;
+    int wiseSayingsSize;
+
+    //개인 스타일대로 인스턴스 변수를 한꺼번에 초기화해도 되지만 변수 선언만 하고 생성자로 초기화를 하면 기능이 나눠지니깐 보기 깔끔함.
+    App() { //new App();을 할 때 자동으로 실행되기 때문에 인스턴스 변수를 초기화 하지 않고 생성자에서 초기화를 해도 됨. new
+        scanner = new Scanner(System.in);
+        lastId = 0;
+        wiseSayings =  new WiseSaying[100];
+        wiseSayingsSize = 0;
+    }
 
     public void run() {
         System.out.println("== 명언 앱 ==");
