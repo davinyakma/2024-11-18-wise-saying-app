@@ -18,8 +18,7 @@ public class App {
     public void run() {
         System.out.println("== 명언 앱 ==");
 
-        //명령을 입력받기 전 샘플데이터를 생성한다. addWiseSaying();이 마치 '등록' 호출문을 여기서 호출한 것 같으니까 수정 필요
-        makeSampleData(); //확실히 샘플 데이터용 메소드임을 알 수 있음.
+        makeSampleData();
 
         while (true) {
             System.out.print("명령) ");
@@ -31,6 +30,10 @@ public class App {
                 actionAdd();
             } else if (cmd.equals("목록")) {
                 actionList();
+            } else if (cmd.startsWith("삭제")) { //cmd.equals("")를 하면 명령어와 같은 문자열만 인식 가능함. startsWith으로 '삭제?id='를 포함한 명령어를 인식하도록 수정
+                String idStr = cmd.substring(6); //'='다음부터 추출한다(id추출 가능)
+                int id = Integer.parseInt(idStr); //String타입을 int로 변환. '1' -> 1(정수)
+                actionDelete(id); //삭제 명령으로 입력한 id에 해당한 명언 삭제
             }
         }
         scanner.close();
@@ -50,6 +53,7 @@ public class App {
         return wiseSaying;
     }
 
+    //액션 함수들
     private void actionAdd() {
         System.out.print("명언 : ");
         String content = scanner.nextLine();
@@ -67,11 +71,11 @@ public class App {
         for (WiseSaying wiseSaying : wiseSayings.reversed()) {
             System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
         }
+    }
 
-        /*for (int i = wiseSayings.size()-1; i >= 0; i--) { //명언을 최신순으로 나열하기 위함. 기존에는 오래된 순(내림차순)으로 출력되었었음.
-            WiseSaying wiseSaying = wiseSayings.get(i);
+    private void actionDelete(int id) {
+        boolean removed = wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id); // removeIf는 boolean값을 리턴함.
 
-            System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
-        }*/
+        if (removed) System.out.println("%d번 명언을 삭제했습니다.".formatted(id)); //removeIf가 true를 리턴했다면 실행
     }
 }
