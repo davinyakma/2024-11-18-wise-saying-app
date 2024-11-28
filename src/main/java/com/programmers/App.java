@@ -1,5 +1,8 @@
 package com.programmers;
 
+import com.programmers.domain.wiseSaying.controller.WiseSayingController;
+import com.programmers.domain.wiseSaying.entity.WiseSaying;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,11 +11,13 @@ public class App {
     private final Scanner scanner;
     private int lastId;
     private final List<WiseSaying> wiseSayings;
+    private final WiseSayingController wiseSayingController;
 
     public App() {
         scanner = new Scanner(System.in);
         lastId = 0;
         wiseSayings = new ArrayList<>();
+        wiseSayingController = new WiseSayingController();
     }
 
     public void run() {
@@ -29,7 +34,7 @@ public class App {
             } else if (cmd.equals("등록")) {
                 actionAdd();
             } else if (cmd.equals("목록")) {
-                actionList();
+                wiseSayingController.actionList(wiseSayings);
             } else if (cmd.startsWith("삭제")) {
                 String idStr = cmd.substring(6);
                 int id = Integer.parseInt(idStr);
@@ -70,15 +75,6 @@ public class App {
         System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.getId()));
     }
 
-    private void actionList() {
-        System.out.println("번호 / 작가 / 명언");
-        System.out.println("----------------------");
-
-        for (WiseSaying wiseSaying : wiseSayings.reversed()) {
-            System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
-        }
-    }
-
     private void actionDelete(int id) {
         boolean removed = wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
 
@@ -98,10 +94,10 @@ public class App {
 
         if ( foundWiseSaying == null ) {
             System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
-            return; //명언이 존재하지 않을때 if문 뒤의 로직은 수행하면 안 되니깐 return; 함수가 void여서 return값을 안 받지만 그냥 return;은 가능함.
+            return;
         }
 
-        System.out.println("명언(기존) : %s" .formatted(foundWiseSaying.getContent())); //+ foundWiseSaying.getContent() 로 formatted대신 사용 가능함.
+        System.out.println("명언(기존) : %s" .formatted(foundWiseSaying.getContent()));
         System.out.print("명언 : ");
         String content = scanner.nextLine();
 

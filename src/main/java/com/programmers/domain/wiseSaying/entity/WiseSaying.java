@@ -1,4 +1,4 @@
-package com.programmers;
+package com.programmers.domain.wiseSaying.entity;
 
 public class WiseSaying {
     private final int id;
