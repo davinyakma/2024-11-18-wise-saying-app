@@ -1,5 +1,6 @@
 package com.programmers;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -19,8 +20,8 @@ class App {
         int lastId = 0;
 
         WiseSaying lastWiseSaying = null;
-        WiseSaying[] wiseSayings =  new WiseSaying[10]; //크기가 10인 wiseSayings배열. 명언이 10가 생성된 것이 아니라 명언을 10개까지 저장할 수 있는것임.
-        int wiseSayingsSize = 0; //실제로 명언들이 저장된 크기를 알야하 해서 size 0으로 초기화
+        WiseSaying[] wiseSayings =  new WiseSaying[10];
+        int wiseSayingsSize = 0;
 
         while (true) {
             System.out.print("명령) ");
@@ -38,9 +39,12 @@ class App {
                 WiseSaying wiseSaying = new WiseSaying(id, content, author);
                 lastWiseSaying = wiseSaying;
 
-                wiseSayings[wiseSayingsSize] = wiseSaying; // 0~ 9인덱스의 명언 저장 가능함.
-                wiseSayingsSize++; //ArrayList 대신에 배열 방식을 사용하면 인덱스 증가 필요함.
+                wiseSayings[wiseSayingsSize] = wiseSaying;
+                wiseSayingsSize++;
 
+                System.out.println(wiseSayings); // wiseSayings의 주소값이 나옴.
+                //[WiseSaying(id=1, content="명언", author="작가"), WiseSaying(id=2, ~), WiseSaying(id=3, ~)] 처럼 출력되도록 하는게 이상적임.
+                System.out.println(Arrays.toString(wiseSayings));
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             } else if (cmd.equals("목록")){
                 System.out.println("번호 / 작가 / 명언");
