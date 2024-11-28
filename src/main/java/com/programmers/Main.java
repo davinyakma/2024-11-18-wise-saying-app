@@ -25,6 +25,16 @@ class App {
     public void run() {
         System.out.println("== 명언 앱 ==");
 
+        //-------------------------
+        //'등록' 명령어 입력했을때만 실행되는 코드를 while문 밖에 중복해서 실행하면 앱을 실행시켰을때 매번 1번 명언은 자동으로 저장되어 있음.
+        //문제는 actionAdd()로직과 중복되는 코드여서 중복코드가 늘어나면 유지보수가 어려워진다.(배열을 list로 바꿀때 중복코드 다 삭제해야 됨.)
+        int id = ++lastId;
+
+        WiseSaying wiseSaying = new WiseSaying(id, "나의 죽음을 적들에게 알리지 말라", "이순신 장군");
+
+        wiseSayings[wiseSayingsSize] = wiseSaying;
+        wiseSayingsSize++;
+        //-------------------------
         while (true) {
             System.out.print("명령) ");
             String cmd = scanner.nextLine();
@@ -34,7 +44,7 @@ class App {
             } else if (cmd.equals("등록")) {
                 actionAdd();
             } else if (cmd.equals("목록")){
-                actionList(); //actionAdd()처럼 actionList()로 run()함수를 분기함.
+                actionList();
             }
         }
         scanner.close();
