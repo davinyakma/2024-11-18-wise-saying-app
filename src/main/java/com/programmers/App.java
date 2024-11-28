@@ -3,9 +3,9 @@ package com.programmers;
 import java.util.Scanner;
 
 public class App {
-    private final Scanner scanner; //scanner는 new Scanner;를 할 일이 없어서 final에 적합
+    private final Scanner scanner;
     private int lastId;
-    private final WiseSaying[] wiseSayings; //배열도 새로운 배열을 만들지는 않으니까 final에 적합
+    private final WiseSaying[] wiseSayings;
     private int wiseSayingsSize;
 
     public App() {
@@ -23,7 +23,7 @@ public class App {
 
         while (true) {
             System.out.print("명령) ");
-            String cmd = scanner.nextLine(); //지역 변수에도 final붙일 수 있는데 지역변수는 수가 많아서 굳이 붙이지는 않는다. 인스턴스 변수에 주로 붙인다.
+            String cmd = scanner.nextLine();
 
             if (cmd.equals("종료")) {
                 break;
@@ -54,7 +54,7 @@ public class App {
         String author = scanner.nextLine();
         WiseSaying wiseSaying = addWiseSaying(content, author);
 
-        System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.id));
+        System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.getId()));
     }
 
     private void actionList() {
@@ -63,7 +63,7 @@ public class App {
 
         for (WiseSaying wiseSaying : wiseSayings) {
             if (wiseSaying == null) break;
-            System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+            System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
         }
     }
 }

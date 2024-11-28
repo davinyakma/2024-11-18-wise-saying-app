@@ -1,14 +1,26 @@
 package com.programmers;
 
 public class WiseSaying {
-    public final int id; //명언 번호는 명언의 고유번호여서 id를 수정하면 안됨. final은 제약
-    public String content;
-    public String author;
+    private final int id;
+    private String content;
+    private String author;
 
     public WiseSaying(int id, String content, String author) {
         this.id = id;
         this.content = content;
         this.author = author;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getContent(){
+        return content;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     @Override
