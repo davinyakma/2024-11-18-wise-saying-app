@@ -44,8 +44,10 @@ class App {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-                for(int i = 0; i < wiseSayingsSize; i++) { //while문으로 작성하면 int i = 0; i++;를 while문의 앞 뒤에 써야하는데 for문은 변수 선언과 변수 증감을 같이 표현할 수 있어서 가독성이 좋다.
-                    WiseSaying wiseSaying = wiseSayings[i];
+                //문제점: 크기가 10인 배열에 명언을 10개 미만으로 저장했을때 나머지 wiseSaying에는 null이 들어가서 NullPointerException이 발생. 예외처리를 해줘야함.
+                for(WiseSaying wiseSaying : wiseSayings) { //향상된 for문. 기존에 (int i = 0; i < wiseSayingsSize; i++)를 수정.
+                    if( wiseSaying == null) break; //이전의 for문은 wiseSayingsSize로 배열의 요소들을 출력했기에 널포인터 에러처리가 필요없었음.
+                    //그러나 향상된 for문에는 wiseSaying이 null이 될 수 있기에 break;를 설정해 줘야함.
                     System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
                 }
             }
