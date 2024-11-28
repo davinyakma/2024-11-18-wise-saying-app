@@ -18,7 +18,7 @@ class App {
 
         int lastId = 0;
 
-        WiseSaying[] wiseSayings =  new WiseSaying[10]; //마지막으로 저장된 명언 하나만 기억하는 lastWiseSaying은 삭제. 그보다는 배열이 여러개의 명언들을 저장할 수 있다.
+        WiseSaying[] wiseSayings =  new WiseSaying[10];
         int wiseSayingsSize = 0;
 
         while (true) {
@@ -44,11 +44,9 @@ class App {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-                int i = 0;
-                while(i < wiseSayingsSize) { //명언을 등록하면 wiseSayingsSize가 증가해서 while문을 선회하게 된다. 따라서 배열에 저장한 요소들을 다 출력 가능함.
+                for(int i = 0; i < wiseSayingsSize; i++) { //while문으로 작성하면 int i = 0; i++;를 while문의 앞 뒤에 써야하는데 for문은 변수 선언과 변수 증감을 같이 표현할 수 있어서 가독성이 좋다.
                     WiseSaying wiseSaying = wiseSayings[i];
                     System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
-                    i++;
                 }
             }
         }
