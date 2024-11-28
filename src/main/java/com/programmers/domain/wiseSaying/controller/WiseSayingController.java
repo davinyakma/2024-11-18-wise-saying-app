@@ -2,13 +2,20 @@ package com.programmers.domain.wiseSaying.controller;
 
 import com.programmers.domain.wiseSaying.entity.WiseSaying;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
+    private final List<WiseSaying> wiseSayings;
     private int lastId;
 
-    public WiseSaying addWiseSaying(List<WiseSaying> wiseSayings, String content, String author) {
+    public WiseSayingController() {
+        this.wiseSayings = new ArrayList<>();
+        this.lastId = 0;
+    }
+
+    public WiseSaying addWiseSaying(String content, String author) {
         int id = ++lastId;
 
         WiseSaying wiseSaying = new WiseSaying(id, content, author);
@@ -17,22 +24,22 @@ public class WiseSayingController {
         return wiseSaying;
     }
 
-    public void makeSampleData(List<WiseSaying> wiseSayings) {
-        addWiseSaying(wiseSayings, "나의 죽음을 적들에게 알리지 말라", "이순신 장군");
-        addWiseSaying(wiseSayings,"삶이 있는 한 희망은 있다.", "키케로");
+    public void makeSampleData() {
+        addWiseSaying( "나의 죽음을 적들에게 알리지 말라", "이순신 장군");
+        addWiseSaying("삶이 있는 한 희망은 있다.", "키케로");
     }
 
-    public  void actionAdd(Scanner scanner, List<WiseSaying> wiseSayings) {
+    public  void actionAdd(Scanner scanner) {
         System.out.print("명언 : ");
         String content = scanner.nextLine();
         System.out.print("작가 : ");
         String author = scanner.nextLine();
-        WiseSaying wiseSaying = addWiseSaying(wiseSayings, content, author);
+        WiseSaying wiseSaying = addWiseSaying(content, author);
 
         System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.getId()));
     }
 
-    public void actionList(List<WiseSaying> wiseSayings) {
+    public void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
@@ -40,7 +47,7 @@ public class WiseSayingController {
             System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
         }
     }
-    public void actionDelete(List<WiseSaying> wiseSayings, String cmd) {
+    public void actionDelete(String cmd) {
         String idStr = cmd.substring(6); //기존에 App에서 cmd.startsWith("삭제")일때 id를 추출하는 기능도 도메인에서 할일
         int id = Integer.parseInt(idStr);
 
@@ -50,7 +57,7 @@ public class WiseSayingController {
         else System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
     }
 
-    public void actionModify(Scanner scanner, List<WiseSaying> wiseSayings, String cmd) {
+    public void actionModify(Scanner scanner, String cmd) {
         String idStr = cmd.substring(6);
         int id = Integer.parseInt(idStr);
 
