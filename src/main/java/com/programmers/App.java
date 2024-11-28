@@ -36,10 +36,7 @@ public class App {
             } else if (cmd.equals("목록")) {
                 wiseSayingController.actionList(wiseSayings);
             } else if (cmd.startsWith("삭제")) {
-                String idStr = cmd.substring(6);
-                int id = Integer.parseInt(idStr);
-
-                wiseSayingController.actionDelete(id, wiseSayings);
+                wiseSayingController.actionDelete(wiseSayings, cmd);
             } else if (cmd.startsWith("수정")) {
                 String idStr = cmd.substring(6);
                 int id = Integer.parseInt(idStr);
