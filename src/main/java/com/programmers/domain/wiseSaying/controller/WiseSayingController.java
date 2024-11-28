@@ -9,10 +9,12 @@ import java.util.Scanner;
 public class WiseSayingController {
     private final List<WiseSaying> wiseSayings;
     private int lastId;
+    private Scanner scanner;
 
-    public WiseSayingController() {
+    public WiseSayingController(Scanner scanner) {
         this.wiseSayings = new ArrayList<>();
         this.lastId = 0;
+        this.scanner = scanner;
     }
 
     public WiseSaying addWiseSaying(String content, String author) {
@@ -29,7 +31,7 @@ public class WiseSayingController {
         addWiseSaying("삶이 있는 한 희망은 있다.", "키케로");
     }
 
-    public  void actionAdd(Scanner scanner) {
+    public  void actionAdd() {
         System.out.print("명언 : ");
         String content = scanner.nextLine();
         System.out.print("작가 : ");
@@ -48,7 +50,7 @@ public class WiseSayingController {
         }
     }
     public void actionDelete(String cmd) {
-        String idStr = cmd.substring(6); //기존에 App에서 cmd.startsWith("삭제")일때 id를 추출하는 기능도 도메인에서 할일
+        String idStr = cmd.substring(6);
         int id = Integer.parseInt(idStr);
 
         boolean removed = wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
@@ -57,7 +59,7 @@ public class WiseSayingController {
         else System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
     }
 
-    public void actionModify(Scanner scanner, String cmd) {
+    public void actionModify(String cmd) {
         String idStr = cmd.substring(6);
         int id = Integer.parseInt(idStr);
 
