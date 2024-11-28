@@ -17,8 +17,8 @@ public class WiseSayingController {
     }
 
     public void makeSampleData() {
-        wiseSayingService.addWiseSaying( "나의 죽음을 적들에게 알리지 말라", "이순신 장군");
-        wiseSayingService.addWiseSaying("삶이 있는 한 희망은 있다.", "키케로");
+        wiseSayingService.add( "나의 죽음을 적들에게 알리지 말라", "이순신 장군");
+        wiseSayingService.add("삶이 있는 한 희망은 있다.", "키케로");
     }
 
     public  void actionAdd() {
@@ -27,7 +27,7 @@ public class WiseSayingController {
         System.out.print("작가 : ");
         String author = scanner.nextLine();
 
-        WiseSaying wiseSaying = wiseSayingService.addWiseSaying(content, author);
+        WiseSaying wiseSaying = wiseSayingService.add(content, author);
 
         System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.getId()));
     }
