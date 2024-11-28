@@ -1,6 +1,5 @@
 package com.programmers;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -19,8 +18,7 @@ class App {
 
         int lastId = 0;
 
-        WiseSaying lastWiseSaying = null;
-        WiseSaying[] wiseSayings =  new WiseSaying[10];
+        WiseSaying[] wiseSayings =  new WiseSaying[10]; //마지막으로 저장된 명언 하나만 기억하는 lastWiseSaying은 삭제. 그보다는 배열이 여러개의 명언들을 저장할 수 있다.
         int wiseSayingsSize = 0;
 
         while (true) {
@@ -37,25 +35,21 @@ class App {
                 int id = ++lastId;
 
                 WiseSaying wiseSaying = new WiseSaying(id, content, author);
-                lastWiseSaying = wiseSaying;
 
                 wiseSayings[wiseSayingsSize] = wiseSaying;
                 wiseSayingsSize++;
 
-                System.out.println(wiseSayings); // wiseSayings의 주소값이 나옴.
-                //[WiseSaying(id=1, content="명언", author="작가"), WiseSaying(id=2, ~), WiseSaying(id=3, ~)] 처럼 출력되도록 하는게 이상적임.
-                System.out.println(Arrays.toString(wiseSayings));
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
             } else if (cmd.equals("목록")){
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-                if (lastWiseSaying != null) {
-                    System.out.println("%d / %s / %s".formatted(lastWiseSaying.id, lastWiseSaying.author, lastWiseSaying.content));
-                } else {
-                    System.out.println("등록된 명언이 없습니다.");
+                int i = 0;
+                while(i < wiseSayingsSize) { //명언을 등록하면 wiseSayingsSize가 증가해서 while문을 선회하게 된다. 따라서 배열에 저장한 요소들을 다 출력 가능함.
+                    WiseSaying wiseSaying = wiseSayings[i];
+                    System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+                    i++;
                 }
-
             }
         }
         scanner.close();
