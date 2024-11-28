@@ -1,7 +1,7 @@
 package com.programmers.domain.wiseSaying.entity;
 
 public class WiseSaying {
-    private int id; //id를 변경 가능하도록 수정
+    private int id;
     private String content;
     private String author;
 
@@ -23,7 +23,7 @@ public class WiseSaying {
         return author;
     }
 
-    public void setId(int id){ //id를 변경할 수 있도록 세터 추가
+    public void setId(int id){
         this.id = id;
     }
 
