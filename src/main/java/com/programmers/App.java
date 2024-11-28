@@ -12,14 +12,14 @@ public class App {
     public App() {
         scanner = new Scanner(System.in);
         lastId = 0;
-        wiseSayings = new ArrayList<>(); //배열은 크기가 유한해서 크기 지정하는 것이 번거로운데 리스트는 크기 지정을 하지 않아도 됨.
+        wiseSayings = new ArrayList<>();
     }
 
     public void run() {
         System.out.println("== 명언 앱 ==");
 
-        addWiseSaying("나의 죽음을 적들에게 알리지 말라", "이순신 장군");
-        addWiseSaying("삶이 있는 한 희망은 있다.", "키케로");
+        //명령을 입력받기 전 샘플데이터를 생성한다. addWiseSaying();이 마치 '등록' 호출문을 여기서 호출한 것 같으니까 수정 필요
+        makeSampleData(); //확실히 샘플 데이터용 메소드임을 알 수 있음.
 
         while (true) {
             System.out.print("명령) ");
@@ -36,14 +36,16 @@ public class App {
         scanner.close();
     }
 
+    private void makeSampleData() {
+        addWiseSaying("나의 죽음을 적들에게 알리지 말라", "이순신 장군");
+        addWiseSaying("삶이 있는 한 희망은 있다.", "키케로");
+    }
+
     private WiseSaying addWiseSaying(String content, String author) {
         int id = ++lastId;
 
         WiseSaying wiseSaying = new WiseSaying(id, content, author);
         wiseSayings.add(wiseSaying);
-
-        System.out.println("wiseSayings = " + wiseSayings); //배열은 wiseSayings하면 주소값이 출력되어서 Arrays.toString을 사용했는데
-        //List는 wiseSayings의 모든 명언 내용을 다 출력해준다.
 
         return wiseSaying;
     }
@@ -62,8 +64,14 @@ public class App {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        for (WiseSaying wiseSaying : wiseSayings) { //리스트는 자동으로 크기 조절이 가능해서 wiseSaying이 null인 경우가 없다. wiseSayings의 size에 맞게끔만 loop 돈다.
+        for (WiseSaying wiseSaying : wiseSayings.reversed()) {
             System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
         }
+
+        /*for (int i = wiseSayings.size()-1; i >= 0; i--) { //명언을 최신순으로 나열하기 위함. 기존에는 오래된 순(내림차순)으로 출력되었었음.
+            WiseSaying wiseSaying = wiseSayings.get(i);
+
+            System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
+        }*/
     }
 }
