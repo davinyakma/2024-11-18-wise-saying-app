@@ -2,10 +2,10 @@ package com.programmers;
 
 import java.util.Scanner;
 
-class App {
-    private Scanner scanner;
+public class App {
+    private final Scanner scanner; //scanner는 new Scanner;를 할 일이 없어서 final에 적합
     private int lastId;
-    private WiseSaying[] wiseSayings;
+    private final WiseSaying[] wiseSayings; //배열도 새로운 배열을 만들지는 않으니까 final에 적합
     private int wiseSayingsSize;
 
     public App() {
@@ -23,7 +23,7 @@ class App {
 
         while (true) {
             System.out.print("명령) ");
-            String cmd = scanner.nextLine();
+            String cmd = scanner.nextLine(); //지역 변수에도 final붙일 수 있는데 지역변수는 수가 많아서 굳이 붙이지는 않는다. 인스턴스 변수에 주로 붙인다.
 
             if (cmd.equals("종료")) {
                 break;

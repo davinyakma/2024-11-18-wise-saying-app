@@ -1,7 +1,7 @@
 package com.programmers;
 
-class WiseSaying {
-    public int id;
+public class WiseSaying {
+    public final int id; //명언 번호는 명언의 고유번호여서 id를 수정하면 안됨. final은 제약
     public String content;
     public String author;
 
