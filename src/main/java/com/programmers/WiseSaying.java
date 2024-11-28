@@ -23,6 +23,14 @@ public class WiseSaying {
         return author;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     @Override
     public String toString() {
         return "WiseSaying (id=%d, content=\"%s\", author=\"%s\")".formatted(id, content, author);
